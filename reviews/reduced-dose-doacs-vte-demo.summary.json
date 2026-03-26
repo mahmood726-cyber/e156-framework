@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "gate": "pass",
+  "missing_personas": [],
+  "invalid_personas": [],
+  "empty_notes": [],
+  "verdict_counts": {
+    "pass": 5,
+    "revise": 0,
+    "block": 0
+  },
+  "required_actions": []
+}

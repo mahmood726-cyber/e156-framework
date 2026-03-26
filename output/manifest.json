@@ -1,0 +1,15 @@
+{
+  "input": "C:\\E156-framework\\batch-input\\projects_template.csv",
+  "records": [
+    {
+      "slug": "reduced-dose-doacs-vte-demo",
+      "title": "Reduced-dose direct oral anticoagulants for extended venous thromboembolism prevention",
+      "json": "C:\\E156-framework\\output\\json\\reduced-dose-doacs-vte-demo.json",
+      "html": "C:\\E156-framework\\output\\html\\reduced-dose-doacs-vte-demo.html",
+      "validation": "C:\\E156-framework\\output\\validation\\reduced-dose-doacs-vte-demo.validation.json",
+      "ok": true,
+      "word_count": 156,
+      "sentence_count": 7
+    }
+  ]
+}

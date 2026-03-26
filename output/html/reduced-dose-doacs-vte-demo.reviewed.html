@@ -1,0 +1,1023 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>E156 Interactive Bundle</title>
+  <style>
+    :root {
+      --bg: #f3efe3;
+      --paper: #fcfaf4;
+      --paper-strong: #f6f0e4;
+      --ink: #1c1a16;
+      --muted: #665d51;
+      --line: #cec2af;
+      --accent: #1f4f73;
+      --accent-soft: #dce8f0;
+      --review: #6e4324;
+      --good: #285f45;
+      --warn: #9d6b1f;
+      --bad: #7d2b2b;
+      --shadow: 0 16px 35px rgba(42, 33, 21, 0.08);
+      --radius: 22px;
+      --mono: "Consolas", "SFMono-Regular", "Menlo", monospace;
+      --sans: "Georgia", "Times New Roman", serif;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(to right, transparent 0, transparent calc(50% - 0.5px), rgba(114, 93, 63, 0.08) calc(50% - 0.5px), rgba(114, 93, 63, 0.08) calc(50% + 0.5px), transparent calc(50% + 0.5px), transparent 100%),
+        radial-gradient(circle at top, rgba(31, 79, 115, 0.07), transparent 30%),
+        var(--bg);
+      font-family: var(--sans);
+      line-height: 1.5;
+    }
+
+    .page {
+      width: min(1320px, calc(100vw - 40px));
+      margin: 24px auto 56px;
+      display: grid;
+      gap: 20px;
+    }
+
+    .masthead {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 18px;
+      padding: 12px 0 16px;
+      border-bottom: 3px double var(--line);
+    }
+
+    .masthead-brand {
+      font-size: clamp(26px, 4vw, 42px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .masthead-meta {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-align: right;
+    }
+
+    .hero,
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero {
+      padding: 30px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(246, 240, 228, 0.95));
+    }
+    .eyebrow {
+      color: var(--accent);
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(34px, 5vw, 62px);
+      line-height: 1.02;
+      letter-spacing: -0.035em;
+      font-weight: 700;
+    }
+
+    .lede {
+      color: var(--muted);
+      max-width: 70ch;
+      margin: 0;
+      font-size: 19px;
+      line-height: 1.75;
+      font-style: italic;
+    }
+
+    .hero-rail {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 24px;
+      justify-content: space-between;
+      font-family: var(--mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 2.15fr 0.95fr;
+      gap: 20px;
+    }
+
+    .card { padding: 22px; }
+    .section-title {
+      margin: 0 0 14px;
+      font-family: var(--mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .body-text {
+      font-size: clamp(21px, 2vw, 27px);
+      line-height: 1.82;
+      margin: 0;
+    }
+
+    .nyt-dropcap::first-letter {
+      float: left;
+      font-size: 5rem;
+      line-height: 0.82;
+      padding: 0.07em 0.12em 0 0;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .body-foot {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .stats {
+      display: grid;
+      gap: 10px;
+    }
+
+    .stat {
+      padding: 14px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(246, 240, 228, 0.95));
+      border: 1px solid var(--line);
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 4px;
+    }
+
+    .stat-value {
+      font-family: var(--mono);
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .stat-small .stat-value {
+      font-family: var(--sans);
+      font-size: 17px;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .note-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .note-item {
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: var(--paper-strong);
+    }
+
+    .note-item strong {
+      display: block;
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .note-item a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .note-value {
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .validation-list,
+    .study-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .validation-list td,
+    .study-table th,
+    .study-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    .study-table th {
+      text-align: left;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 64px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .chip.pass { background: rgba(40, 95, 69, 0.13); color: var(--good); }
+    .chip.revise { background: rgba(157, 107, 31, 0.15); color: var(--warn); }
+    .chip.block { background: rgba(125, 43, 43, 0.15); color: var(--bad); }
+
+    .consensus-card {
+      padding: 18px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(239, 227, 213, 0.8), rgba(252, 250, 244, 0.95));
+      border: 1px solid rgba(110, 67, 36, 0.22);
+      margin-bottom: 16px;
+    }
+
+    .consensus-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+      margin-bottom: 12px;
+    }
+
+    .consensus-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--review);
+      margin-bottom: 6px;
+    }
+
+    .consensus-value {
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .consensus-meta {
+      margin-top: 10px;
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+
+    .review-board {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 12px;
+    }
+
+    .review-board-item {
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(116, 100, 77, 0.22);
+      border-top: 3px solid rgba(31, 79, 115, 0.42);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(247, 242, 229, 0.95));
+    }
+
+    .review-board-role {
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .review-board-name {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .review-board-meta,
+    .review-signoff {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(116, 100, 77, 0.35);
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .review-card {
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(116, 100, 77, 0.22);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(247, 242, 229, 0.95));
+    }
+
+    .review-card-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .reviewer-name {
+      font-size: 20px;
+      font-weight: 700;
+      text-transform: capitalize;
+    }
+
+    .review-focus {
+      margin-bottom: 10px;
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    .review-notes {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--ink);
+    }
+
+    .review-actions {
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(116, 100, 77, 0.35);
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .review-actions ul {
+      margin: 8px 0 0 16px;
+      padding: 0;
+    }
+
+    .plot-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    .plot-caption {
+      margin-top: 12px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      line-height: 1.6;
+    }
+
+    .json-box {
+      font-family: var(--mono);
+      font-size: 12px;
+      white-space: pre-wrap;
+      word-break: break-word;
+      background: #151b24;
+      color: #d9f5ea;
+      padding: 16px;
+      border-radius: 16px;
+      overflow: auto;
+    }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+      .body-text { font-size: 20px; }
+      .masthead { flex-direction: column; align-items: start; }
+      .hero-rail { flex-direction: column; align-items: start; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="masthead">
+      <div class="masthead-brand">E156 Review Desk</div>
+      <div class="masthead-meta" id="masthead-meta">Interactive micro-paper edition</div>
+    </header>
+
+    <section class="hero">
+      <div class="eyebrow">E156 Interactive Bundle</div>
+      <h1 id="title" class="nyt-headline"></h1>
+      <p class="lede nyt-subhead" id="lede"></p>
+      <div class="hero-rail">
+        <div id="hero-type">Type</div>
+        <div id="hero-version">Version</div>
+        <div id="hero-date">Date</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">Reviewer Board</h2>
+      <div class="review-board" id="review-board"></div>
+    </section>
+
+    <section class="grid">
+      <article class="card">
+        <h2 class="section-title">Frozen Body</h2>
+        <p class="body-text nyt-dropcap" id="body"></p>
+        <div class="body-foot" id="body-foot">The frozen body stands alone while the surrounding page carries the wider evidence layer.</div>
+      </article>
+
+      <aside class="card">
+        <h2 class="section-title">Core Record</h2>
+        <div class="stats" id="core-stats"></div>
+      </aside>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">Note Block</h2>
+      <div class="note-grid" id="note-grid"></div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">Validation</h2>
+      <table class="validation-list" id="validation-table"></table>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">Multi-Persona Review</h2>
+      <div id="review-table"></div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">Primary Plot</h2>
+      <div class="plot-wrap">
+        <svg id="forest-plot" width="980" height="360" aria-label="forest plot"></svg>
+      </div>
+      <div class="plot-caption" id="plot-caption"></div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">Study Table</h2>
+      <table class="study-table" id="study-table"></table>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">Embedded JSON</h2>
+      <div class="json-box" id="json-box"></div>
+    </section>
+  </main>
+
+  <script>
+    const E156_ARTICLE = {
+  "title": "Reduced-dose direct oral anticoagulants for extended venous thromboembolism prevention",
+  "summary": "A sample E156 batch row showing the frozen body plus the richer HTML evidence layer.",
+  "type": "pairwise",
+  "primary_estimand": "Risk ratio for major bleeding",
+  "study_count": 3,
+  "participant_count": 8615,
+  "version": "0.1.0",
+  "date": "2026-03-26",
+  "certainty": "moderate",
+  "app": "Interactive HTML bundle",
+  "data": "Embedded summary rows in this demo JSON",
+  "code": "Local generation via scripts/build_e156_batch.py",
+  "doi": "Pending demo DOI",
+  "protocol": "Not included in this abstract-level demo",
+  "source_article": "https://pubmed.ncbi.nlm.nih.gov/41210567/",
+  "body": "In adults receiving extended anticoagulation after venous thromboembolism, do reduced-dose direct oral anticoagulants preserve efficacy while lowering bleeding versus full-dose therapy? Three randomized trials with 8,615 participants compared reduced-dose and full-dose direct oral anticoagulants for secondary prevention. Investigators systematically searched major databases through March 20, 2025 and pooled trial outcomes as risk ratios with 95% confidence intervals. Reduced-dose therapy lowered major bleeding, with pooled risk ratio 0.49 and 95% confidence interval 0.29 to 0.81. Clinically relevant nonmajor bleeding and all-cause mortality also favored dose reduction, while recurrent venous thromboembolism, pulmonary embolism outcomes, and deep vein thrombosis recurrence remained statistically similar. These findings support reduced-dose regimens as a reasonable long-term option when bleeding avoidance is a clinical priority after initial treatment in routine practice settings. Confidence is limited by only three trials, sparse fatal event counts, and the need for longer follow-up to confirm durability across patient subgroups and to define which patients can safely de-intensify therapy.",
+  "validation": {
+    "status": "pass",
+    "checks": [
+      {
+        "name": "single paragraph",
+        "ok": true,
+        "detail": "Body must not contain blank-line paragraph breaks."
+      },
+      {
+        "name": "sentence count",
+        "ok": true,
+        "detail": "Found 7 sentences."
+      },
+      {
+        "name": "word count",
+        "ok": true,
+        "detail": "Found 156 words."
+      },
+      {
+        "name": "no headings",
+        "ok": true,
+        "detail": "No markdown headings allowed in body."
+      },
+      {
+        "name": "no links",
+        "ok": true,
+        "detail": "No links or DOI links allowed in body."
+      },
+      {
+        "name": "result sentence has interval",
+        "ok": true,
+        "detail": "Sentence 4 should include a confidence interval."
+      },
+      {
+        "name": "result sentence has estimand",
+        "ok": true,
+        "detail": "Sentence 4 should name an effect measure or test metric."
+      },
+      {
+        "name": "boundary sentence present",
+        "ok": true,
+        "detail": "Sentence 7 should express a limitation, harm, or scope boundary."
+      }
+    ]
+  },
+  "primary_plot": {
+    "reference": 1,
+    "caption": "Demo forest-style plot based on three illustrative rows and the pooled estimate carried in the micro-paper body.",
+    "pooled": {
+      "label": "Pooled",
+      "effect": 0.49,
+      "lower": 0.29,
+      "upper": 0.81
+    }
+  },
+  "studies": [
+    {
+      "label": "Illustrative trial A",
+      "effect": 0.63,
+      "lower": 0.33,
+      "upper": 1.19,
+      "weight": "33%"
+    },
+    {
+      "label": "Illustrative trial B",
+      "effect": 0.51,
+      "lower": 0.24,
+      "upper": 1.07,
+      "weight": "31%"
+    },
+    {
+      "label": "Illustrative trial C",
+      "effect": 0.34,
+      "lower": 0.12,
+      "upper": 0.94,
+      "weight": "36%"
+    }
+  ],
+  "journal_wrapper": "demo",
+  "review": {
+    "article_slug": "reduced-dose-doacs-vte-demo",
+    "reviewed_at": "2026-03-26",
+    "article_title": "Reduced-dose direct oral anticoagulants for extended venous thromboembolism prevention",
+    "personas": {
+      "clinician": {
+        "focus": "practical clarity",
+        "verdict": "pass",
+        "notes": "The question, treatment contrast, and practical takeaway are clear at the bedside level.",
+        "required_actions": []
+      },
+      "statistician": {
+        "focus": "numerical honesty",
+        "verdict": "pass",
+        "notes": "The body names the pooled risk ratio and confidence interval directly and keeps the claim within the reported evidence.",
+        "required_actions": []
+      },
+      "methods_editor": {
+        "focus": "structure discipline",
+        "verdict": "pass",
+        "notes": "All seven sentence roles are preserved and the boundary sentence functions as an explicit limitation.",
+        "required_actions": []
+      },
+      "skeptic": {
+        "focus": "overclaim and causality check",
+        "verdict": "pass",
+        "notes": "Interpretation is restrained and does not claim superiority beyond the pooled outcomes and follow-up described.",
+        "required_actions": []
+      },
+      "reader": {
+        "focus": "flow and readability",
+        "verdict": "pass",
+        "notes": "The paragraph reads cleanly in sequence, though the illustrative study rows belong outside the frozen body as they do here.",
+        "required_actions": []
+      }
+    }
+  },
+  "review_summary": {
+    "ok": true,
+    "gate": "pass",
+    "missing_personas": [],
+    "invalid_personas": [],
+    "empty_notes": [],
+    "verdict_counts": {
+      "pass": 5,
+      "revise": 0,
+      "block": 0
+    },
+    "required_actions": []
+  }
+};
+
+    function el(tag, className, text) {
+      const node = document.createElement(tag);
+      if (className) node.className = className;
+      if (text !== undefined) node.textContent = text;
+      return node;
+    }
+
+    function normalizeVerdict(value) {
+      const text = String(value || "").toLowerCase();
+      if (text === "pass" || text === "revise" || text === "block") {
+        return text;
+      }
+      return "pass";
+    }
+
+    function personaLabel(value) {
+      return String(value || "").replace(/_/g, " ");
+    }
+
+    function appendStat(container, label, value, useSmallValue) {
+      const card = el("div", useSmallValue ? "stat stat-small" : "stat");
+      card.append(el("div", "stat-label", label));
+      card.append(el("div", "stat-value", value ?? "—"));
+      container.append(card);
+    }
+
+    function renderCore(article) {
+      document.getElementById("title").textContent = article.title || "Untitled E156 record";
+      document.getElementById("lede").textContent =
+        article.summary ||
+        "A frozen 156-word body paired with a richer interactive evidence layer.";
+      document.getElementById("body").textContent = article.body || "";
+      document.getElementById("masthead-meta").textContent = `${article.date || "Undated"} | ${article.version || "No version"} | interactive evidence edition`;
+      document.getElementById("hero-type").textContent = `Type: ${article.type || "-"}`;
+      document.getElementById("hero-version").textContent = `Version: ${article.version || "-"}`;
+      document.getElementById("hero-date").textContent = `Date: ${article.date || "-"}`;
+      document.getElementById("body-foot").textContent = `Primary estimand: ${article.primary_estimand || "-"} | certainty: ${article.certainty || "-"}`;
+
+      const core = document.getElementById("core-stats");
+      appendStat(core, "Type", article.type);
+      appendStat(core, "Primary Estimand", article.primary_estimand, true);
+      appendStat(core, "Studies", article.study_count);
+      appendStat(core, "Participants", article.participant_count);
+      appendStat(core, "Version", article.version, true);
+      appendStat(core, "Certainty", article.certainty, true);
+    }
+
+    function renderNotes(article) {
+      const fields = [
+        ["App", article.app],
+        ["Data", article.data],
+        ["Code", article.code],
+        ["DOI", article.doi],
+        ["Version", article.version],
+        ["Date", article.date],
+        ["Validation", article.validation?.status],
+        ["Protocol", article.protocol],
+        ["Source article", article.source_article]
+      ];
+
+      const grid = document.getElementById("note-grid");
+      fields.forEach(([label, value]) => {
+        const item = el("div", "note-item");
+        item.append(el("strong", "", label));
+        if (!value) {
+          item.append(el("div", "", "—"));
+        } else if (typeof value === "string" && /^https?:/i.test(value)) {
+          const link = el("a", "", value);
+          link.href = value;
+          link.target = "_blank";
+          link.rel = "noreferrer";
+          item.append(link);
+        } else {
+          item.append(el("div", "", String(value)));
+        }
+        grid.append(item);
+      });
+    }
+
+    function renderValidation(article) {
+      const table = document.getElementById("validation-table");
+      const checks = article.validation?.checks || [];
+      checks.forEach((check) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td><span class="chip ${check.ok ? "pass" : "block"}">${check.ok ? "PASS" : "FAIL"}</span></td><td>${check.name}</td><td>${check.detail || ""}</td>`;
+        table.append(row);
+      });
+    }
+
+    function renderReviewBoard(article) {
+      const board = document.getElementById("review-board");
+      const review = article.review || null;
+
+      if (!review || !review.personas || !Object.keys(review.personas).length) {
+        board.innerHTML = `<div><span class="chip">PENDING</span> Reviewer assignments appear when a multi-persona review is attached.</div>`;
+        return;
+      }
+
+      board.innerHTML = "";
+      Object.entries(review.personas || {}).forEach(([name, persona]) => {
+        const item = document.createElement("article");
+        const personaVerdict = normalizeVerdict(persona.verdict);
+        const reviewerId = persona.reviewer_id || personaLabel(name);
+        const signedAt = persona.signed_at || review.reviewed_at || article.date || "-";
+        item.className = "review-board-item";
+        item.innerHTML = `
+          <div class="review-card-head">
+            <div>
+              <div class="review-board-role">${personaLabel(name)}</div>
+              <div class="review-board-name">${reviewerId}</div>
+            </div>
+            <span class="chip ${personaVerdict}">${String(persona.verdict || "unknown").toUpperCase()}</span>
+          </div>
+          <div class="review-board-meta">Signed ${signedAt}</div>
+        `;
+        board.append(item);
+      });
+    }
+
+    function renderReview(article) {
+      const table = document.getElementById("review-table");
+      const review = article.review || null;
+      const summary = article.review_summary || null;
+
+      if (!review || !summary) {
+        table.innerHTML = `<div><span class="chip">NONE</span> No multi-persona review attached.</div>`;
+        return;
+      }
+
+      const actions = (summary.required_actions || [])
+        .map((entry) => `${entry.persona}: ${entry.action}`)
+        .join(" | ");
+      const verdict = normalizeVerdict(summary.gate);
+      table.innerHTML = `
+        <div class="consensus-card">
+          <div class="consensus-head">
+            <div>
+              <div class="consensus-label">Consensus Gate</div>
+              <div class="consensus-value">${String(summary.gate || "unknown").toUpperCase()}</div>
+              <div class="consensus-meta">Filed ${review.reviewed_at || article.date || "-"}</div>
+            </div>
+            <span class="chip ${verdict}">${String(summary.gate || "unknown").toUpperCase()}</span>
+          </div>
+          <div>Pass ${summary.verdict_counts?.pass ?? 0} | Revise ${summary.verdict_counts?.revise ?? 0} | Block ${summary.verdict_counts?.block ?? 0}</div>
+          <div style="margin-top:10px; color: var(--muted);">${actions || "No mandatory actions recorded."}</div>
+        </div>
+        <div class="review-grid" id="review-grid"></div>
+      `;
+
+      const grid = document.getElementById("review-grid");
+      Object.entries(review.personas || {}).forEach(([name, persona]) => {
+        const card = document.createElement("article");
+        const personaVerdict = normalizeVerdict(persona.verdict);
+        const reviewerId = persona.reviewer_id || personaLabel(name);
+        const signedAt = persona.signed_at || review.reviewed_at || article.date || "-";
+        const actionsList = Array.isArray(persona.required_actions) && persona.required_actions.length
+          ? `<div class="review-actions"><strong>Required actions</strong><ul>${persona.required_actions.map((action) => `<li>${action}</li>`).join("")}</ul></div>`
+          : "";
+        card.className = "review-card";
+        card.innerHTML = `
+          <div class="review-card-head">
+            <div class="reviewer-name">${personaLabel(name)}</div>
+            <span class="chip ${personaVerdict}">${String(persona.verdict || "unknown").toUpperCase()}</span>
+          </div>
+          <div class="review-focus">${persona.focus || ""}</div>
+          <p class="review-notes">${persona.notes || ""}</p>
+          ${actionsList}
+          <div class="review-signoff">Signed ${signedAt} by ${reviewerId}</div>
+        `;
+        grid.append(card);
+      });
+    }
+
+    function renderStudyTable(article) {
+      const table = document.getElementById("study-table");
+      const studies = article.studies || [];
+      table.innerHTML = `
+        <thead>
+          <tr>
+            <th>Study</th>
+            <th>Effect</th>
+            <th>Lower</th>
+            <th>Upper</th>
+            <th>Weight</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      `;
+      const tbody = table.querySelector("tbody");
+
+      if (!studies.length) {
+        const row = document.createElement("tr");
+        row.innerHTML = `<td colspan="5">No study-level rows embedded in this bundle.</td>`;
+        tbody.append(row);
+        return;
+      }
+
+      studies.forEach((study) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${study.label ?? ""}</td>
+          <td>${study.effect ?? ""}</td>
+          <td>${study.lower ?? ""}</td>
+          <td>${study.upper ?? ""}</td>
+          <td>${study.weight ?? ""}</td>
+        `;
+        tbody.append(row);
+      });
+    }
+
+    function drawForest(article) {
+      const svg = document.getElementById("forest-plot");
+      const width = Number(svg.getAttribute("width"));
+      const height = Number(svg.getAttribute("height"));
+      const margin = { top: 36, right: 36, bottom: 48, left: 240 };
+      const studies = article.studies || [];
+      const pooled = article.primary_plot?.pooled || null;
+      const reference = article.primary_plot?.reference ?? 1;
+
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+
+      const points = [];
+      studies.forEach((s) => {
+        if ([s.effect, s.lower, s.upper].every((v) => Number.isFinite(Number(v)))) {
+          points.push({
+            label: s.label,
+            effect: Number(s.effect),
+            lower: Number(s.lower),
+            upper: Number(s.upper),
+            pooled: false
+          });
+        }
+      });
+      if (pooled && [pooled.effect, pooled.lower, pooled.upper].every((v) => Number.isFinite(Number(v)))) {
+        points.push({
+          label: pooled.label || "Pooled",
+          effect: Number(pooled.effect),
+          lower: Number(pooled.lower),
+          upper: Number(pooled.upper),
+          pooled: true
+        });
+      }
+
+      if (!points.length) {
+        const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        text.setAttribute("x", "24");
+        text.setAttribute("y", "48");
+        text.textContent = "No numeric plot data embedded.";
+        svg.append(text);
+        return;
+      }
+
+      const minX = Math.min(...points.map((p) => p.lower), reference);
+      const maxX = Math.max(...points.map((p) => p.upper), reference);
+      const plotWidth = width - margin.left - margin.right;
+      const plotHeight = height - margin.top - margin.bottom;
+      const rowGap = plotHeight / Math.max(points.length, 1);
+
+      const scale = (value) => {
+        if (maxX === minX) return margin.left + plotWidth / 2;
+        return margin.left + ((value - minX) / (maxX - minX)) * plotWidth;
+      };
+
+      const axis = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      axis.setAttribute("x1", margin.left);
+      axis.setAttribute("x2", width - margin.right);
+      axis.setAttribute("y1", height - margin.bottom);
+      axis.setAttribute("y2", height - margin.bottom);
+      axis.setAttribute("stroke", "#46505c");
+      svg.append(axis);
+
+      const ref = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      ref.setAttribute("x1", scale(reference));
+      ref.setAttribute("x2", scale(reference));
+      ref.setAttribute("y1", margin.top / 2);
+      ref.setAttribute("y2", height - margin.bottom);
+      ref.setAttribute("stroke", "#9a6a4d");
+      ref.setAttribute("stroke-dasharray", "5 5");
+      svg.append(ref);
+
+      points.forEach((point, index) => {
+        const y = margin.top + index * rowGap + rowGap / 2;
+
+        const label = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        label.setAttribute("x", "16");
+        label.setAttribute("y", String(y + 4));
+        label.setAttribute("font-size", "13");
+        label.textContent = point.label;
+        svg.append(label);
+
+        const ci = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        ci.setAttribute("x1", scale(point.lower));
+        ci.setAttribute("x2", scale(point.upper));
+        ci.setAttribute("y1", y);
+        ci.setAttribute("y2", y);
+        ci.setAttribute("stroke", point.pooled ? "#0d6b57" : "#4c5b6a");
+        ci.setAttribute("stroke-width", point.pooled ? "3" : "2");
+        svg.append(ci);
+
+        const marker = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+        marker.setAttribute("x", String(scale(point.effect) - (point.pooled ? 7 : 5)));
+        marker.setAttribute("y", String(y - (point.pooled ? 7 : 5)));
+        marker.setAttribute("width", String(point.pooled ? 14 : 10));
+        marker.setAttribute("height", String(point.pooled ? 14 : 10));
+        marker.setAttribute("fill", point.pooled ? "#0d6b57" : "#223144");
+        marker.setAttribute("rx", "2");
+        svg.append(marker);
+
+        const val = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        val.setAttribute("x", String(width - margin.right + 6));
+        val.setAttribute("y", String(y + 4));
+        val.setAttribute("font-size", "12");
+        val.textContent = `${point.effect} (${point.lower}, ${point.upper})`;
+        svg.append(val);
+      });
+
+      const ticks = [minX, reference, maxX].filter((value, idx, arr) => arr.indexOf(value) === idx);
+      ticks.forEach((tick) => {
+        const tickX = scale(tick);
+        const tickLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        tickLine.setAttribute("x1", tickX);
+        tickLine.setAttribute("x2", tickX);
+        tickLine.setAttribute("y1", String(height - margin.bottom));
+        tickLine.setAttribute("y2", String(height - margin.bottom + 8));
+        tickLine.setAttribute("stroke", "#46505c");
+        svg.append(tickLine);
+
+        const tickText = document.createElementNS("http://www.w3.org/2000/svg", "text");
+        tickText.setAttribute("x", String(tickX));
+        tickText.setAttribute("y", String(height - margin.bottom + 24));
+        tickText.setAttribute("text-anchor", "middle");
+        tickText.setAttribute("font-size", "12");
+        tickText.textContent = Number(tick).toFixed(2);
+        svg.append(tickText);
+      });
+
+      document.getElementById("plot-caption").textContent =
+        article.primary_plot?.caption ||
+        "Primary effect plot generated from embedded numeric values.";
+    }
+
+    function renderJson(article) {
+      document.getElementById("json-box").textContent = JSON.stringify(article, null, 2);
+    }
+
+    renderCore(E156_ARTICLE);
+    renderNotes(E156_ARTICLE);
+    renderValidation(E156_ARTICLE);
+    renderReviewBoard(E156_ARTICLE);
+    renderReview(E156_ARTICLE);
+    renderStudyTable(E156_ARTICLE);
+    drawForest(E156_ARTICLE);
+    renderJson(E156_ARTICLE);
+  </script>
+</body>
+</html>
