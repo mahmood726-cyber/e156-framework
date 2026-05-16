@@ -58,12 +58,27 @@ Initialize a multi-persona review file from an article JSON:
 python scripts\review_e156.py --init --article output\json\reduced-dose-doacs-vte-demo.json --output reviews\reduced-dose-doacs-vte-demo.review.json
 ```
 
+Generate a signed starter review file with reviewer desk assignments:
+
+```powershell
+python scripts\review_e156.py --init --article examples\clinical-ma.json --output reviews\clinical-ma.review.json --starter-mode --seed-reviewers --signed-at 2026-03-26
+```
+
 Check or attach a completed review:
 
 ```powershell
 python scripts\review_e156.py --check --review reviews\reduced-dose-doacs-vte-demo.review.json --summary-out reviews\reduced-dose-doacs-vte-demo.summary.json
 python scripts\review_e156.py --attach --article output\json\reduced-dose-doacs-vte-demo.json --review reviews\reduced-dose-doacs-vte-demo.review.json --output output\json\reduced-dose-doacs-vte-demo.reviewed.json --summary-out reviews\reduced-dose-doacs-vte-demo.summary.json
 ```
+
+Each completed review should include:
+
+- `reviewed_at` for the overall review filing date
+- `reviewer_id` for each persona
+- `signed_at` for each persona
+- concise notes for each persona
+
+The interactive HTML renders those fields as a reviewer board, consensus filing line, and signed persona cards.
 
 ## Design Position
 

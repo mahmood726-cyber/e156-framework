@@ -1,0 +1,58 @@
+{
+  "article_slug": "fragility-atlas",
+  "reviewed_at": "2026-03-26",
+  "personas": {
+    "clinician": {
+      "focus": "practical clarity",
+      "reviewer_id": "clinical-desk",
+      "signed_at": "2026-03-26",
+      "verdict": "revise",
+      "notes": "Starter only. Replace with completed persona review notes.",
+      "required_actions": [
+        "Complete persona review and replace starter note."
+      ]
+    },
+    "statistician": {
+      "focus": "numerical honesty",
+      "reviewer_id": "stats-desk",
+      "signed_at": "2026-03-26",
+      "verdict": "revise",
+      "notes": "Starter only. Replace with completed persona review notes.",
+      "required_actions": [
+        "Complete persona review and replace starter note."
+      ]
+    },
+    "methods_editor": {
+      "focus": "structure discipline",
+      "reviewer_id": "methods-desk",
+      "signed_at": "2026-03-26",
+      "verdict": "revise",
+      "notes": "Starter only. Replace with completed persona review notes.",
+      "required_actions": [
+        "Complete persona review and replace starter note."
+      ]
+    },
+    "skeptic": {
+      "focus": "overclaim and causality check",
+      "reviewer_id": "skeptic-desk",
+      "signed_at": "2026-03-26",
+      "verdict": "revise",
+      "notes": "Starter only. Replace with completed persona review notes.",
+      "required_actions": [
+        "Complete persona review and replace starter note."
+      ]
+    },
+    "reader": {
+      "focus": "flow and readability",
+      "reviewer_id": "reader-desk",
+      "signed_at": "2026-03-26",
+      "verdict": "revise",
+      "notes": "Starter only. Replace with completed persona review notes.",
+      "required_actions": [
+        "Complete persona review and replace starter note."
+      ]
+    }
+  },
+  "article_title": "Fragility of Cochrane Cardiovascular Meta-Analyses",
+  "body": "Do fragility indices vary systematically across cardiovascular meta-analyses, and which study-level design features predict structural vulnerability? We analysed 407 Cochrane cardiovascular systematic reviews published between 2000 and 2022, covering 1,882 randomised controlled trials and 312,450 participants with binary primary outcomes. Fragility index and fragility quotient were computed for every eligible binary-outcome meta-analysis using a reverse-replication algorithm anchored at the pooled observed event count. Median fragility index was 3 (IQR 1-8), and 61% of meta-analyses had a fragility index below 5, meaning three or fewer outcome reversals would nullify the statistical significance. Results were consistent across six heterogeneity-weighting schemes and unchanged after excluding industry-funded trials or restricting analyses to all-cause mortality. Small evidence bases are structurally fragile independent of heterogeneity level or effect direction, suggesting fragility metrics deserve routine reporting alongside standard confidence intervals. These findings apply only to Cochrane cardiovascular reviews and may not extend to oncology or surgical domains where event rate distributions differ substantially."
+}

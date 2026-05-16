@@ -1,0 +1,58 @@
+{
+  "article_slug": "metarep",
+  "reviewed_at": "2026-03-26",
+  "personas": {
+    "clinician": {
+      "focus": "practical clarity",
+      "reviewer_id": "clinical-desk",
+      "signed_at": "2026-03-26",
+      "verdict": "revise",
+      "notes": "Starter only. Replace with completed persona review notes.",
+      "required_actions": [
+        "Complete persona review and replace starter note."
+      ]
+    },
+    "statistician": {
+      "focus": "numerical honesty",
+      "reviewer_id": "stats-desk",
+      "signed_at": "2026-03-26",
+      "verdict": "revise",
+      "notes": "Starter only. Replace with completed persona review notes.",
+      "required_actions": [
+        "Complete persona review and replace starter note."
+      ]
+    },
+    "methods_editor": {
+      "focus": "structure discipline",
+      "reviewer_id": "methods-desk",
+      "signed_at": "2026-03-26",
+      "verdict": "revise",
+      "notes": "Starter only. Replace with completed persona review notes.",
+      "required_actions": [
+        "Complete persona review and replace starter note."
+      ]
+    },
+    "skeptic": {
+      "focus": "overclaim and causality check",
+      "reviewer_id": "skeptic-desk",
+      "signed_at": "2026-03-26",
+      "verdict": "revise",
+      "notes": "Starter only. Replace with completed persona review notes.",
+      "required_actions": [
+        "Complete persona review and replace starter note."
+      ]
+    },
+    "reader": {
+      "focus": "flow and readability",
+      "reviewer_id": "reader-desk",
+      "signed_at": "2026-03-26",
+      "verdict": "revise",
+      "notes": "Starter only. Replace with completed persona review notes.",
+      "required_actions": [
+        "Complete persona review and replace starter note."
+      ]
+    }
+  },
+  "article_title": "Replication Probability in Meta-Analysis",
+  "body": "Can a meta-analysis predict the probability that a future independent trial will replicate its pooled effect estimate within a pre-specified equivalence margin? We prospectively evaluated the method on 120 published meta-analyses each with at least one known subsequent independent replication trial, spanning cardiology, oncology, and psychiatry. Replication probability was derived analytically from the pooled estimate, its heterogeneity-adjusted standard error, and the replication margin, using a normal-predictive-distribution framework. Across all 120 cases, the method achieved a calibration slope of 0.91 (95% CI 0.84-0.98), with predicted probabilities exceeding 70% correctly forecasting replication in 83% of trials. Calibration held within subgroups defined by effect size, heterogeneity quantile, and clinical domain, with no significant interaction detected for any stratifier. Replication probability translates pooled-effect uncertainty into a decision-relevant probability, offering a more actionable and interpretable summary than the prediction interval alone. Applicability is limited to settings where a replication margin can be pre-specified; open-ended exploratory syntheses fall outside the method scope."
+}

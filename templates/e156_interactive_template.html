@@ -6,238 +6,323 @@
   <title>E156 Interactive Bundle</title>
   <style>
     :root {
-      --bg: #f3efe3;
-      --paper: #fcfaf4;
-      --paper-strong: #f6f0e4;
-      --ink: #1c1a16;
-      --muted: #665d51;
-      --line: #cec2af;
-      --accent: #1f4f73;
-      --accent-soft: #dce8f0;
-      --review: #6e4324;
-      --good: #285f45;
-      --warn: #9d6b1f;
-      --bad: #7d2b2b;
-      --shadow: 0 16px 35px rgba(42, 33, 21, 0.08);
-      --radius: 22px;
-      --mono: "Consolas", "SFMono-Regular", "Menlo", monospace;
-      --sans: "Georgia", "Times New Roman", serif;
+      --bg: #f6f3ee;
+      --paper: rgba(255, 255, 255, 0.92);
+      --paper-strong: #fbfaf7;
+      --ink: #111111;
+      --muted: #5f5a53;
+      --line: #ddd5ca;
+      --line-strong: #b8aea2;
+      --accent: #326891;
+      --accent-soft: #e8f0f6;
+      --review: #6b5435;
+      --good: #216c53;
+      --warn: #a06a12;
+      --bad: #922b21;
+      --shadow: 0 16px 38px rgba(17, 17, 17, 0.045);
+      --radius: 8px;
+      --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+      --sans: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
     }
 
     * { box-sizing: border-box; }
+
+    @keyframes rise-in {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     body {
       margin: 0;
       color: var(--ink);
       background:
-        linear-gradient(to right, transparent 0, transparent calc(50% - 0.5px), rgba(114, 93, 63, 0.08) calc(50% - 0.5px), rgba(114, 93, 63, 0.08) calc(50% + 0.5px), transparent calc(50% + 0.5px), transparent 100%),
-        radial-gradient(circle at top, rgba(31, 79, 115, 0.07), transparent 30%),
-        var(--bg);
-      font-family: var(--sans);
+        radial-gradient(circle at top, rgba(50, 104, 145, 0.08), transparent 28%),
+        linear-gradient(180deg, #fcfbf8 0%, var(--bg) 100%);
+      font-family: var(--serif);
       line-height: 1.5;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
     }
 
     .page {
-      width: min(1320px, calc(100vw - 40px));
-      margin: 24px auto 56px;
+      width: min(1280px, calc(100vw - 48px));
+      margin: 18px auto 72px;
       display: grid;
-      gap: 20px;
+      gap: 24px;
     }
 
     .masthead {
       display: flex;
       justify-content: space-between;
-      align-items: flex-end;
+      align-items: end;
       gap: 18px;
-      padding: 12px 0 16px;
+      padding: 10px 0 18px;
+      border-top: 1px solid var(--line-strong);
       border-bottom: 3px double var(--line);
+      animation: rise-in 0.65s ease-out both;
     }
 
     .masthead-brand {
-      font-size: clamp(26px, 4vw, 42px);
+      font-family: var(--serif);
+      font-size: clamp(30px, 4vw, 46px);
       font-weight: 700;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.035em;
     }
 
     .masthead-meta {
-      font-family: var(--mono);
-      font-size: 12px;
+      max-width: 38ch;
+      font-family: var(--sans);
+      font-size: 11px;
       color: var(--muted);
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.15em;
       text-align: right;
+      line-height: 1.6;
     }
 
     .hero,
     .card {
       background: var(--paper);
       border: 1px solid var(--line);
-      border-radius: var(--radius);
       box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
     }
 
     .hero {
-      padding: 30px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(246, 240, 228, 0.95));
+      position: relative;
+      overflow: hidden;
+      padding: 40px clamp(22px, 4vw, 52px) 34px;
+      border-top: 4px solid var(--ink);
+      animation: rise-in 0.72s ease-out both;
     }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -10% -40% auto;
+      width: 44%;
+      aspect-ratio: 1;
+      background: radial-gradient(circle, rgba(50, 104, 145, 0.13), transparent 68%);
+      pointer-events: none;
+    }
+
     .eyebrow {
+      position: relative;
+      z-index: 1;
       color: var(--accent);
-      font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: 0.14em;
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       font-weight: 700;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     h1 {
-      margin: 0 0 12px;
-      font-size: clamp(34px, 5vw, 62px);
-      line-height: 1.02;
-      letter-spacing: -0.035em;
+      position: relative;
+      z-index: 1;
+      margin: 0 0 16px;
+      max-width: 13ch;
+      font-family: var(--serif);
+      font-size: clamp(42px, 6vw, 78px);
+      line-height: 0.97;
+      letter-spacing: -0.05em;
       font-weight: 700;
+      text-wrap: balance;
     }
 
     .lede {
-      color: var(--muted);
-      max-width: 70ch;
+      position: relative;
+      z-index: 1;
+      color: #464038;
+      max-width: 56rem;
       margin: 0;
-      font-size: 19px;
-      line-height: 1.75;
-      font-style: italic;
+      font-size: clamp(19px, 2.2vw, 25px);
+      line-height: 1.62;
+      font-style: normal;
+      text-wrap: pretty;
     }
 
     .hero-rail {
-      margin-top: 20px;
-      padding-top: 16px;
+      position: relative;
+      z-index: 1;
+      margin-top: 28px;
+      padding-top: 18px;
       border-top: 1px solid var(--line);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px 24px;
-      justify-content: space-between;
-      font-family: var(--mono);
-      font-size: 12px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      font-family: var(--sans);
+      font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.14em;
       color: var(--muted);
+    }
+
+    .hero-rail > div {
+      padding: 12px 14px;
+      border-top: 1px solid var(--line-strong);
+      background: rgba(255, 255, 255, 0.62);
     }
 
     .grid {
       display: grid;
-      grid-template-columns: 2.15fr 0.95fr;
-      gap: 20px;
+      grid-template-columns: minmax(0, 1.8fr) minmax(290px, 0.95fr);
+      gap: 24px;
+      animation: rise-in 0.72s ease-out 0.08s both;
     }
 
-    .card { padding: 22px; }
+    .card {
+      padding: 26px clamp(18px, 2.4vw, 30px);
+      border-radius: var(--radius);
+      animation: rise-in 0.72s ease-out 0.14s both;
+    }
+
+    article.card {
+      border-top: 3px solid var(--ink);
+    }
+
+    aside.card {
+      align-self: start;
+      position: sticky;
+      top: 20px;
+      border-top: 3px solid var(--accent);
+    }
+
     .section-title {
-      margin: 0 0 14px;
-      font-family: var(--mono);
-      font-size: 12px;
+      margin: 0 0 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      font-family: var(--sans);
+      font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.16em;
       color: var(--muted);
     }
 
     .body-text {
-      font-size: clamp(21px, 2vw, 27px);
-      line-height: 1.82;
+      max-width: 29ch;
       margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(23px, 2.3vw, 31px);
+      line-height: 1.77;
+      text-wrap: pretty;
     }
 
     .nyt-dropcap::first-letter {
       float: left;
-      font-size: 5rem;
+      font-family: var(--serif);
+      font-size: 4.85rem;
       line-height: 0.82;
-      padding: 0.07em 0.12em 0 0;
+      padding: 0.09em 0.12em 0 0;
       color: var(--accent);
       font-weight: 700;
     }
 
     .body-foot {
-      margin-top: 18px;
-      padding-top: 16px;
+      margin-top: 22px;
+      padding-top: 14px;
       border-top: 1px solid var(--line);
+      font-family: var(--sans);
       color: var(--muted);
-      font-size: 13px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.8;
     }
 
     .stats {
       display: grid;
-      gap: 10px;
+      gap: 12px;
     }
 
     .stat {
-      padding: 14px;
-      border-radius: 16px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(246, 240, 228, 0.95));
+      padding: 16px;
       border: 1px solid var(--line);
+      border-left: 4px solid var(--accent);
+      background: var(--paper-strong);
     }
 
     .stat-label {
       color: var(--muted);
-      font-family: var(--mono);
-      font-size: 11px;
+      font-family: var(--sans);
+      font-size: 10px;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 4px;
+      letter-spacing: 0.16em;
+      margin-bottom: 8px;
     }
 
     .stat-value {
-      font-family: var(--mono);
-      font-size: 24px;
+      font-family: var(--sans);
+      font-size: 30px;
       font-weight: 800;
-      color: var(--accent);
+      line-height: 1.05;
+      color: var(--ink);
     }
 
     .stat-small .stat-value {
-      font-family: var(--sans);
-      font-size: 17px;
-      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 20px;
       font-weight: 700;
+      color: var(--ink);
     }
 
     .note-grid {
       display: grid;
-      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
     }
 
     .note-item {
-      padding: 12px 14px;
-      border-radius: 16px;
+      padding: 14px 16px;
       border: 1px solid var(--line);
       background: var(--paper-strong);
+      min-height: 110px;
     }
 
     .note-item strong {
       display: block;
-      font-family: var(--mono);
-      font-size: 11px;
+      font-family: var(--sans);
+      font-size: 10px;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.16em;
       color: var(--muted);
-      margin-bottom: 6px;
+      margin-bottom: 10px;
     }
 
     .note-item a {
       color: var(--accent);
       text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    .note-item a:hover {
+      border-color: currentColor;
     }
 
     .note-value {
       font-size: 15px;
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
-    .validation-list,
     .study-table {
       width: 100%;
       border-collapse: collapse;
       font-size: 14px;
+      background: rgba(255, 255, 255, 0.78);
     }
 
-    .validation-list td,
     .study-table th,
     .study-table td {
-      padding: 10px 12px;
+      padding: 12px 12px;
       border-bottom: 1px solid var(--line);
       vertical-align: top;
     }
@@ -245,216 +330,502 @@
     .study-table th {
       text-align: left;
       color: var(--muted);
-      font-family: var(--mono);
-      font-size: 11px;
+      font-family: var(--sans);
+      font-size: 10px;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.16em;
+      background: #f8f5ef;
+    }
+
+    .study-table tbody tr:hover {
+      background: rgba(50, 104, 145, 0.045);
+    }
+
+    .study-table tbody tr:nth-child(even) {
+      background: rgba(248, 245, 239, 0.7);
+    }
+
+    .data-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: end;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .data-search-wrap {
+      flex: 1 1 320px;
+      max-width: 520px;
+    }
+
+    .data-search-label,
+    .data-summary-label {
+      display: block;
+      margin-bottom: 8px;
+      font-family: var(--sans);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+    }
+
+    .data-search {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid var(--line-strong);
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .data-search:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(50, 104, 145, 0.12);
+    }
+
+    .data-summary {
+      min-width: 180px;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      background: var(--paper-strong);
+      font-family: var(--sans);
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.92);
     }
 
     .chip {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 64px;
-      padding: 6px 10px;
+      min-width: 68px;
+      padding: 6px 12px;
       border-radius: 999px;
-      font-family: var(--mono);
-      font-size: 11px;
+      border: 1px solid transparent;
+      font-family: var(--sans);
+      font-size: 10px;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       background: var(--accent-soft);
       color: var(--accent);
     }
 
-    .chip.pass { background: rgba(40, 95, 69, 0.13); color: var(--good); }
-    .chip.revise { background: rgba(157, 107, 31, 0.15); color: var(--warn); }
-    .chip.block { background: rgba(125, 43, 43, 0.15); color: var(--bad); }
-
-    .consensus-card {
-      padding: 18px;
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(239, 227, 213, 0.8), rgba(252, 250, 244, 0.95));
-      border: 1px solid rgba(110, 67, 36, 0.22);
-      margin-bottom: 16px;
+    .chip.pass {
+      background: rgba(33, 108, 83, 0.1);
+      border-color: rgba(33, 108, 83, 0.16);
+      color: var(--good);
     }
 
-    .consensus-head {
+    .chip.revise {
+      background: rgba(160, 106, 18, 0.1);
+      border-color: rgba(160, 106, 18, 0.18);
+      color: var(--warn);
+    }
+
+    .chip.block {
+      background: rgba(146, 43, 33, 0.11);
+      border-color: rgba(146, 43, 33, 0.18);
+      color: var(--bad);
+    }
+
+    .chips {
       display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: start;
-      margin-bottom: 12px;
-    }
-
-    .consensus-label {
-      font-family: var(--mono);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--review);
-      margin-bottom: 6px;
-    }
-
-    .consensus-value {
-      font-size: 28px;
-      font-weight: 700;
-      line-height: 1;
-    }
-
-    .consensus-meta {
+      flex-wrap: wrap;
+      gap: 8px;
       margin-top: 10px;
-      font-family: var(--mono);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--muted);
     }
 
-    .review-grid {
+    .search-layout,
+    .included-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 14px;
     }
 
-    .review-board {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 12px;
+    .search-layout {
+      grid-template-columns: 1.2fr 0.8fr;
     }
 
-    .review-board-item {
-      padding: 14px 16px;
-      border-radius: 18px;
-      border: 1px solid rgba(116, 100, 77, 0.22);
-      border-top: 3px solid rgba(31, 79, 115, 0.42);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(247, 242, 229, 0.95));
-    }
-
-    .review-board-role {
-      font-family: var(--mono);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    .review-board-name {
-      font-size: 19px;
-      font-weight: 700;
-      color: var(--ink);
-    }
-
-    .review-board-meta,
-    .review-signoff {
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px dashed rgba(116, 100, 77, 0.35);
-      font-family: var(--mono);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-    }
-
-    .review-card {
+    .panel {
       padding: 16px;
-      border-radius: 18px;
-      border: 1px solid rgba(116, 100, 77, 0.22);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(247, 242, 229, 0.95));
+      border: 1px solid var(--line);
+      background: var(--paper-strong);
     }
 
-    .review-card-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
+    .panel-label {
+      display: block;
       margin-bottom: 10px;
-    }
-
-    .reviewer-name {
-      font-size: 20px;
-      font-weight: 700;
-      text-transform: capitalize;
-    }
-
-    .review-focus {
-      margin-bottom: 10px;
-      font-family: var(--mono);
-      font-size: 11px;
+      font-family: var(--sans);
+      font-size: 10px;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.16em;
       color: var(--muted);
     }
 
-    .review-notes {
+    .panel p {
       margin: 0;
       font-size: 16px;
-      line-height: 1.65;
-      color: var(--ink);
+      line-height: 1.7;
+      color: #2c2723;
+      text-wrap: pretty;
     }
 
-    .review-actions {
-      margin-top: 12px;
+    .meta-list,
+    .reason-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 12px;
+      align-items: start;
       padding-top: 10px;
-      border-top: 1px dashed rgba(116, 100, 77, 0.35);
-      font-size: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .meta-row:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .meta-term {
+      font-family: var(--sans);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
       color: var(--muted);
     }
 
-    .review-actions ul {
-      margin: 8px 0 0 16px;
-      padding: 0;
+    .meta-value {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #2b2622;
+      word-break: break-word;
+    }
+
+    .query-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .query-card {
+      padding: 14px;
+      border: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .query-title {
+      margin-bottom: 8px;
+      font-family: var(--sans);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+    }
+
+    .query-text {
+      margin: 0;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.75;
+      color: #214159;
+    }
+
+    .prisma-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .prisma-card {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--accent);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(249, 246, 241, 0.94));
+    }
+
+    .prisma-step {
+      margin-bottom: 8px;
+      font-family: var(--sans);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+    }
+
+    .prisma-count {
+      font-family: var(--serif);
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+    }
+
+    .prisma-detail {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #2c2723;
+      line-height: 1.6;
+    }
+
+    .reason-item {
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.7);
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: baseline;
+    }
+
+    .reason-item strong {
+      font-family: var(--sans);
+      font-size: 12px;
+      letter-spacing: 0.02em;
+    }
+
+    .reason-count {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    .included-grid {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .included-card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-top: 3px solid var(--ink);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(249, 246, 241, 0.94));
+    }
+
+    .included-title {
+      margin: 0 0 8px;
+      font-family: var(--serif);
+      font-size: 26px;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .included-citation {
+      margin: 0 0 14px;
+      font-size: 16px;
+      line-height: 1.72;
+      color: #2c2723;
+      text-wrap: pretty;
+    }
+
+    .data-points {
+      margin-top: 14px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .data-point {
+      padding: 10px 12px;
+      border-left: 3px solid var(--accent);
+      background: rgba(50, 104, 145, 0.05);
+      font-size: 14px;
+      line-height: 1.7;
+      color: #27445a;
+    }
+
+    .analysis-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .analysis-btn {
+      padding: 10px 14px;
+      border: 1px solid var(--line-strong);
+      background: #fff;
+      color: var(--muted);
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      cursor: pointer;
+      transition: border-color 0.18s ease, color 0.18s ease, background 0.18s ease;
+    }
+
+    .analysis-btn:hover,
+    .analysis-btn.active {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .analysis-stage {
+      min-height: 180px;
+    }
+
+    .analysis-card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(249, 246, 241, 0.94));
+    }
+
+    .analysis-title {
+      margin: 0 0 10px;
+      font-family: var(--serif);
+      font-size: 28px;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+
+    .analysis-summary {
+      margin: 0 0 14px;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #2c2723;
+      text-wrap: pretty;
+    }
+
+    .analysis-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .analysis-item {
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.84);
+    }
+
+    .analysis-item strong {
+      display: block;
+      margin-bottom: 4px;
+      font-family: var(--sans);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+    }
+
+    .empty {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--muted);
     }
 
     .plot-wrap {
       overflow-x: auto;
       border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 16px;
-      background: rgba(255, 255, 255, 0.75);
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.9);
     }
 
     .plot-caption {
-      margin-top: 12px;
+      margin-top: 14px;
       color: var(--muted);
-      font-family: var(--mono);
-      font-size: 11px;
+      font-family: var(--sans);
+      font-size: 10px;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
-      line-height: 1.6;
+      letter-spacing: 0.16em;
+      line-height: 1.8;
     }
 
-    .json-box {
-      font-family: var(--mono);
-      font-size: 12px;
-      white-space: pre-wrap;
-      word-break: break-word;
-      background: #151b24;
-      color: #d9f5ea;
-      padding: 16px;
-      border-radius: 16px;
-      overflow: auto;
+    @media (max-width: 1100px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .search-layout,
+      .prisma-grid {
+        grid-template-columns: 1fr;
+      }
+
+      aside.card {
+        position: static;
+      }
+
+      .hero-rail {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 900px) {
-      .grid { grid-template-columns: 1fr; }
-      .body-text { font-size: 20px; }
-      .masthead { flex-direction: column; align-items: start; }
-      .hero-rail { flex-direction: column; align-items: start; }
+      .page {
+        width: min(100vw - 28px, 1280px);
+        margin: 14px auto 48px;
+        gap: 18px;
+      }
+
+      .masthead {
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .masthead-meta {
+        text-align: left;
+      }
+
+      .body-text {
+        font-size: 20px;
+      }
+
+      .note-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .included-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .meta-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+
+      .data-toolbar {
+        align-items: stretch;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .masthead,
+      .hero,
+      .grid,
+      .card {
+        animation: none;
+      }
     }
   </style>
 </head>
 <body>
   <main class="page">
     <header class="masthead">
-      <div class="masthead-brand">E156 Review Desk</div>
-      <div class="masthead-meta" id="masthead-meta">Interactive micro-paper edition</div>
+      <div class="masthead-brand">E156 Interactive Edition</div>
+      <div class="masthead-meta" id="masthead-meta">Interactive paper companion</div>
     </header>
 
     <section class="hero">
-      <div class="eyebrow">E156 Interactive Bundle</div>
+      <div class="eyebrow">Interactive Paper Companion</div>
       <h1 id="title" class="nyt-headline"></h1>
       <p class="lede nyt-subhead" id="lede"></p>
       <div class="hero-rail">
@@ -464,41 +835,36 @@
       </div>
     </section>
 
-    <section class="card">
-      <h2 class="section-title">Reviewer Board</h2>
-      <div class="review-board" id="review-board"></div>
-    </section>
-
     <section class="grid">
       <article class="card">
-        <h2 class="section-title">Frozen Body</h2>
+        <h2 class="section-title">Paper</h2>
         <p class="body-text nyt-dropcap" id="body"></p>
         <div class="body-foot" id="body-foot">The frozen body stands alone while the surrounding page carries the wider evidence layer.</div>
       </article>
 
       <aside class="card">
-        <h2 class="section-title">Core Record</h2>
+        <h2 class="section-title">Evidence Snapshot</h2>
         <div class="stats" id="core-stats"></div>
       </aside>
     </section>
 
     <section class="card">
-      <h2 class="section-title">Note Block</h2>
-      <div class="note-grid" id="note-grid"></div>
+      <h2 class="section-title">Search Strategy</h2>
+      <div id="search-strategy"></div>
     </section>
 
     <section class="card">
-      <h2 class="section-title">Validation</h2>
-      <table class="validation-list" id="validation-table"></table>
+      <h2 class="section-title">PRISMA Flow</h2>
+      <div id="prisma-flow"></div>
     </section>
 
     <section class="card">
-      <h2 class="section-title">Multi-Persona Review</h2>
-      <div id="review-table"></div>
+      <h2 class="section-title">Included Papers</h2>
+      <div id="included-papers"></div>
     </section>
 
     <section class="card">
-      <h2 class="section-title">Primary Plot</h2>
+      <h2 class="section-title">Interactive Plot</h2>
       <div class="plot-wrap">
         <svg id="forest-plot" width="980" height="360" aria-label="forest plot"></svg>
       </div>
@@ -506,13 +872,31 @@
     </section>
 
     <section class="card">
-      <h2 class="section-title">Study Table</h2>
-      <table class="study-table" id="study-table"></table>
+      <h2 class="section-title">Analysis Explorer</h2>
+      <div class="analysis-controls" id="analysis-controls"></div>
+      <div class="analysis-stage" id="analysis-stage"></div>
     </section>
 
     <section class="card">
-      <h2 class="section-title">Embedded JSON</h2>
-      <div class="json-box" id="json-box"></div>
+      <h2 class="section-title">Methods And Sources</h2>
+      <div class="note-grid" id="note-grid"></div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">Data Explorer</h2>
+      <div class="data-toolbar">
+        <div class="data-search-wrap">
+          <label class="data-search-label" for="study-filter">Filter studies or effects</label>
+          <input id="study-filter" class="data-search" type="search" placeholder="Search study label, effect, or weight">
+        </div>
+        <div>
+          <div class="data-summary-label">Rows shown</div>
+          <div class="data-summary" id="data-summary">0 rows</div>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="study-table" id="study-table"></table>
+      </div>
     </section>
   </main>
 
@@ -524,18 +908,6 @@
       if (className) node.className = className;
       if (text !== undefined) node.textContent = text;
       return node;
-    }
-
-    function normalizeVerdict(value) {
-      const text = String(value || "").toLowerCase();
-      if (text === "pass" || text === "revise" || text === "block") {
-        return text;
-      }
-      return "pass";
-    }
-
-    function personaLabel(value) {
-      return String(value || "").replace(/_/g, " ");
     }
 
     function appendStat(container, label, value, useSmallValue) {
@@ -729,6 +1101,385 @@
       });
     }
 
+    function appendStat(container, label, value, useSmallValue) {
+      const card = el("div", useSmallValue ? "stat stat-small" : "stat");
+      card.append(el("div", "stat-label", label));
+      card.append(el("div", "stat-value", value ?? "-"));
+      container.append(card);
+    }
+
+    function renderCore(article) {
+      document.getElementById("title").textContent = article.title || "Untitled E156 record";
+      document.getElementById("lede").textContent =
+        article.summary ||
+        "A frozen 156-word body paired with a richer interactive evidence layer.";
+      document.getElementById("body").textContent = article.body || "";
+      document.getElementById("masthead-meta").textContent = `${article.date || "Undated"} | ${article.version || "No version"} | interactive paper companion`;
+      document.getElementById("hero-type").textContent = `Type: ${article.type || "-"}`;
+      document.getElementById("hero-version").textContent = `Version: ${article.version || "-"}`;
+      document.getElementById("hero-date").textContent = `Date: ${article.date || "-"}`;
+      document.getElementById("body-foot").textContent =
+        `Primary estimand: ${article.primary_estimand || "-"} | certainty: ${article.certainty || "-"} | search strategy, PRISMA, included papers, analysis options, and study data are embedded below.`;
+
+      const core = document.getElementById("core-stats");
+      core.innerHTML = "";
+      appendStat(core, "Type", article.type);
+      appendStat(core, "Primary Estimand", article.primary_estimand, true);
+      appendStat(core, "Studies", article.study_count);
+      appendStat(core, "Participants", article.participant_count);
+      appendStat(core, "Version", article.version, true);
+      appendStat(core, "Certainty", article.certainty, true);
+    }
+
+    function renderNotes(article) {
+      const fields = [
+        ["App", article.app],
+        ["Data", article.data],
+        ["Code", article.code],
+        ["DOI", article.doi],
+        ["Version", article.version],
+        ["Date", article.date],
+        ["Protocol", article.protocol],
+        ["Source article", article.source_article]
+      ];
+
+      const grid = document.getElementById("note-grid");
+      grid.innerHTML = "";
+      fields.forEach(([label, value]) => {
+        const item = el("div", "note-item");
+        item.append(el("strong", "", label));
+        if (!value) {
+          item.append(el("div", "note-value", "-"));
+        } else if (typeof value === "string" && /^https?:/i.test(value)) {
+          const link = el("a", "note-value", value);
+          link.href = value;
+          link.target = "_blank";
+          link.rel = "noreferrer";
+          item.append(link);
+        } else {
+          item.append(el("div", "note-value", String(value)));
+        }
+        grid.append(item);
+      });
+    }
+
+    function renderSearchStrategy(article) {
+      const mount = document.getElementById("search-strategy");
+      const search = article.search_strategy || {};
+      const databases = Array.isArray(search.databases) ? search.databases.filter(Boolean) : [];
+      const registers = Array.isArray(search.registers) ? search.registers.filter(Boolean) : [];
+      const filters = Array.isArray(search.filters) ? search.filters.filter(Boolean) : [];
+      const queries = Array.isArray(search.queries) ? search.queries.filter(Boolean) : [];
+
+      if (!search.summary && !databases.length && !registers.length && !filters.length && !queries.length && !search.date_range && !search.last_searched) {
+        mount.innerHTML = `<p class="empty">Search strategy details are not embedded in this companion yet.</p>`;
+        return;
+      }
+
+      mount.innerHTML = `
+        <div class="search-layout">
+          <div class="panel" id="search-summary-panel"></div>
+          <div class="panel" id="search-meta-panel"></div>
+        </div>
+        <div class="query-list" id="query-list"></div>
+      `;
+
+      const summaryPanel = document.getElementById("search-summary-panel");
+      summaryPanel.append(el("span", "panel-label", "Search overview"));
+      summaryPanel.append(el("p", "", search.summary || "Search strategy embedded for transparency."));
+
+      if (databases.length) {
+        const label = el("span", "panel-label", "Databases");
+        label.style.marginTop = "14px";
+        summaryPanel.append(label);
+        const wrap = el("div", "chips");
+        databases.forEach((item) => wrap.append(el("span", "chip", String(item))));
+        summaryPanel.append(wrap);
+      }
+
+      if (registers.length) {
+        const label = el("span", "panel-label", "Registers");
+        label.style.marginTop = "14px";
+        summaryPanel.append(label);
+        const wrap = el("div", "chips");
+        registers.forEach((item) => wrap.append(el("span", "chip", String(item))));
+        summaryPanel.append(wrap);
+      }
+
+      if (filters.length) {
+        const label = el("span", "panel-label", "Filters");
+        label.style.marginTop = "14px";
+        summaryPanel.append(label);
+        const wrap = el("div", "chips");
+        filters.forEach((item) => wrap.append(el("span", "chip", String(item))));
+        summaryPanel.append(wrap);
+      }
+
+      const metaPanel = document.getElementById("search-meta-panel");
+      metaPanel.append(el("span", "panel-label", "Search metadata"));
+      const metaList = el("div", "meta-list");
+      [
+        ["Coverage", search.date_range],
+        ["Last searched", search.last_searched],
+        ["Interface", search.interface],
+        ["Language limits", search.language_limits]
+      ].forEach(([label, value]) => {
+        if (!value) return;
+        const row = el("div", "meta-row");
+        row.append(el("div", "meta-term", label));
+        row.append(el("div", "meta-value", String(value)));
+        metaList.append(row);
+      });
+      if (metaList.children.length) {
+        metaPanel.append(metaList);
+      } else {
+        metaPanel.append(el("p", "", "No additional search metadata embedded."));
+      }
+
+      const queryList = document.getElementById("query-list");
+      if (!queries.length) {
+        queryList.append(el("p", "empty", "No explicit search strings are embedded in this companion."));
+        return;
+      }
+
+      queries.forEach((query) => {
+        const card = el("div", "query-card");
+        card.append(el("div", "query-title", query.label || "Query"));
+        card.append(el("pre", "query-text", query.text || ""));
+        queryList.append(card);
+      });
+    }
+
+    function renderPrisma(article) {
+      const mount = document.getElementById("prisma-flow");
+      const prisma = article.prisma || {};
+      const steps = [
+        ["Identified", prisma.identified, prisma.identified_detail],
+        ["Screened", prisma.screened, prisma.screened_detail],
+        ["Full text", prisma.full_text_assessed, prisma.full_text_detail],
+        ["Included", prisma.included, prisma.included_detail]
+      ];
+      const reasons = Array.isArray(prisma.exclusion_reasons) ? prisma.exclusion_reasons.filter(Boolean) : [];
+      const hasCounts = steps.some(([, count]) => count !== undefined && count !== null && count !== "");
+
+      if (!hasCounts && !reasons.length) {
+        mount.innerHTML = `<p class="empty">PRISMA counts are not embedded in this companion yet.</p>`;
+        return;
+      }
+
+      const grid = el("div", "prisma-grid");
+      steps.forEach(([label, count, detail]) => {
+        if (count === undefined || count === null || count === "") return;
+        const card = el("div", "prisma-card");
+        card.append(el("div", "prisma-step", label));
+        card.append(el("div", "prisma-count", String(count)));
+        if (detail) card.append(el("div", "prisma-detail", String(detail)));
+        grid.append(card);
+      });
+      mount.append(grid);
+
+      const reasonList = el("div", "reason-list");
+      [
+        prisma.duplicates_removed !== undefined && prisma.duplicates_removed !== null ? { reason: "Duplicates removed", count: prisma.duplicates_removed } : null,
+        prisma.excluded_title_abstract !== undefined && prisma.excluded_title_abstract !== null ? { reason: "Excluded at title or abstract screen", count: prisma.excluded_title_abstract } : null,
+        prisma.full_text_excluded !== undefined && prisma.full_text_excluded !== null ? { reason: "Excluded after full-text review", count: prisma.full_text_excluded } : null,
+        ...reasons
+      ].filter(Boolean).forEach((item) => {
+        const row = el("div", "reason-item");
+        row.append(el("strong", "", String(item.reason || "Reason")));
+        row.append(el("div", "reason-count", `${item.count ?? "-"} records`));
+        reasonList.append(row);
+      });
+      if (reasonList.children.length) {
+        mount.append(reasonList);
+      }
+    }
+
+    function renderIncludedPapers(article) {
+      const mount = document.getElementById("included-papers");
+      const papers = Array.isArray(article.included_papers) ? article.included_papers.filter(Boolean) : [];
+
+      if (!papers.length) {
+        mount.innerHTML = `<p class="empty">Included-paper references are not embedded in this companion yet.</p>`;
+        return;
+      }
+
+      const grid = el("div", "included-grid");
+      papers.forEach((paper) => {
+        const card = el("article", "included-card");
+        card.append(el("h3", "included-title", paper.label || paper.short_title || "Included paper"));
+        card.append(el("p", "included-citation", paper.citation || "Reference not provided."));
+
+        const meta = el("div", "meta-list");
+        [
+          ["Identifier", paper.identifier],
+          ["Design", paper.design],
+          ["Sample", paper.sample],
+          ["Population", paper.population],
+          ["Intervention", paper.intervention],
+          ["Comparator", paper.comparator],
+          ["Follow-up", paper.follow_up],
+          ["Location", paper.location]
+        ].forEach(([label, value]) => {
+          if (!value) return;
+          const row = el("div", "meta-row");
+          row.append(el("div", "meta-term", label));
+          row.append(el("div", "meta-value", String(value)));
+          meta.append(row);
+        });
+        if (meta.children.length) card.append(meta);
+
+        const points = Array.isArray(paper.data_points) ? paper.data_points.filter(Boolean) : [];
+        if (points.length) {
+          const wrap = el("div", "data-points");
+          points.forEach((point) => wrap.append(el("div", "data-point", String(point))));
+          card.append(wrap);
+        }
+
+        grid.append(card);
+      });
+      mount.append(grid);
+    }
+
+    function renderAnalysisExplorer(article) {
+      const controls = document.getElementById("analysis-controls");
+      const stage = document.getElementById("analysis-stage");
+      const analyses = Array.isArray(article.analysis_modules) ? article.analysis_modules.filter(Boolean) : [];
+
+      if (!analyses.length) {
+        controls.innerHTML = "";
+        stage.innerHTML = `<p class="empty">Analysis modules are not embedded in this companion yet.</p>`;
+        return;
+      }
+
+      controls.innerHTML = "";
+      stage.innerHTML = "";
+
+      const renderModule = (module) => {
+        stage.innerHTML = "";
+        const card = el("div", "analysis-card");
+        card.append(el("h3", "analysis-title", module.title || "Analysis"));
+        if (module.summary) {
+          card.append(el("p", "analysis-summary", module.summary));
+        }
+
+        const list = el("div", "analysis-list");
+        [
+          ["Method", module.method],
+          ["Result", module.result],
+          ["Interpretation", module.interpretation],
+          ["Model", module.model],
+          ["P value", module.p_value],
+          ["Notes", module.notes]
+        ].forEach(([label, value]) => {
+          if (!value) return;
+          const item = el("div", "analysis-item");
+          item.append(el("strong", "", label));
+          item.append(el("div", "", String(value)));
+          list.append(item);
+        });
+
+        const items = Array.isArray(module.items) ? module.items.filter(Boolean) : [];
+        items.forEach((entry) => {
+          const item = el("div", "analysis-item");
+          if (entry.label) item.append(el("strong", "", entry.label));
+          item.append(el("div", "", entry.value ? String(entry.value) : String(entry)));
+          list.append(item);
+        });
+
+        if (list.children.length) {
+          card.append(list);
+        }
+        stage.append(card);
+      };
+
+      analyses.forEach((module, index) => {
+        const button = el("button", "analysis-btn", module.short_label || module.title || `Analysis ${index + 1}`);
+        button.type = "button";
+        button.addEventListener("click", () => {
+          controls.querySelectorAll(".analysis-btn").forEach((node) => node.classList.remove("active"));
+          button.classList.add("active");
+          renderModule(module);
+        });
+        if (index === 0) button.classList.add("active");
+        controls.append(button);
+      });
+
+      renderModule(analyses[0]);
+    }
+
+    function renderStudyTable(article) {
+      const table = document.getElementById("study-table");
+      const searchInput = document.getElementById("study-filter");
+      const summary = document.getElementById("data-summary");
+      const studies = article.studies || [];
+      const columnCandidates = [
+        ["label", "Study"],
+        ["citation", "Reference"],
+        ["year", "Year"],
+        ["design", "Design"],
+        ["sample", "Sample"],
+        ["intervention", "Intervention"],
+        ["comparator", "Comparator"],
+        ["effect", "Effect"],
+        ["lower", "Lower"],
+        ["upper", "Upper"],
+        ["weight", "Weight"]
+      ];
+      const activeColumns = columnCandidates.filter(([key]) =>
+        studies.some((study) => study[key] !== undefined && study[key] !== null && study[key] !== "")
+      );
+
+      const renderRows = () => {
+        const query = String(searchInput?.value || "").trim().toLowerCase();
+        const filtered = studies.filter((study) => {
+          if (!query) return true;
+          const haystack = Object.values(study).map((value) => String(value ?? "").toLowerCase()).join(" ");
+          return haystack.includes(query);
+        });
+
+        table.innerHTML = `
+          <thead>
+            <tr>
+              ${(activeColumns.length ? activeColumns : columnCandidates.slice(0, 5)).map(([, label]) => `<th>${label}</th>`).join("")}
+            </tr>
+          </thead>
+          <tbody></tbody>
+        `;
+        const tbody = table.querySelector("tbody");
+        const columns = activeColumns.length ? activeColumns : columnCandidates.slice(0, 5);
+
+        if (!studies.length) {
+          const row = document.createElement("tr");
+          row.innerHTML = `<td colspan="${columns.length}">No study-level rows are embedded in this interactive companion.</td>`;
+          tbody.append(row);
+          summary.textContent = "0 of 0 rows";
+          return;
+        }
+
+        if (!filtered.length) {
+          const row = document.createElement("tr");
+          row.innerHTML = `<td colspan="${columns.length}">No rows match the current filter.</td>`;
+          tbody.append(row);
+          summary.textContent = `0 of ${studies.length} rows`;
+          return;
+        }
+
+        filtered.forEach((study) => {
+          const row = document.createElement("tr");
+          row.innerHTML = columns.map(([key]) => `<td>${study[key] ?? ""}</td>`).join("");
+          tbody.append(row);
+        });
+
+        summary.textContent = `${filtered.length} of ${studies.length} rows`;
+      };
+
+      if (searchInput) {
+        searchInput.addEventListener("input", renderRows);
+      }
+      renderRows();
+    }
+
     function drawForest(article) {
       const svg = document.getElementById("forest-plot");
       const width = Number(svg.getAttribute("width"));
@@ -865,13 +1616,13 @@
     }
 
     renderCore(E156_ARTICLE);
+    renderSearchStrategy(E156_ARTICLE);
+    renderPrisma(E156_ARTICLE);
+    renderIncludedPapers(E156_ARTICLE);
+    renderAnalysisExplorer(E156_ARTICLE);
     renderNotes(E156_ARTICLE);
-    renderValidation(E156_ARTICLE);
-    renderReviewBoard(E156_ARTICLE);
-    renderReview(E156_ARTICLE);
-    renderStudyTable(E156_ARTICLE);
     drawForest(E156_ARTICLE);
-    renderJson(E156_ARTICLE);
+    renderStudyTable(E156_ARTICLE);
   </script>
 </body>
 </html>

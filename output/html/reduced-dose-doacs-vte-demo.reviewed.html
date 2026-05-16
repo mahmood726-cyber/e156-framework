@@ -6,238 +6,323 @@
   <title>E156 Interactive Bundle</title>
   <style>
     :root {
-      --bg: #f3efe3;
-      --paper: #fcfaf4;
-      --paper-strong: #f6f0e4;
-      --ink: #1c1a16;
-      --muted: #665d51;
-      --line: #cec2af;
-      --accent: #1f4f73;
-      --accent-soft: #dce8f0;
-      --review: #6e4324;
-      --good: #285f45;
-      --warn: #9d6b1f;
-      --bad: #7d2b2b;
-      --shadow: 0 16px 35px rgba(42, 33, 21, 0.08);
-      --radius: 22px;
-      --mono: "Consolas", "SFMono-Regular", "Menlo", monospace;
-      --sans: "Georgia", "Times New Roman", serif;
+      --bg: #f6f3ee;
+      --paper: rgba(255, 255, 255, 0.92);
+      --paper-strong: #fbfaf7;
+      --ink: #111111;
+      --muted: #5f5a53;
+      --line: #ddd5ca;
+      --line-strong: #b8aea2;
+      --accent: #326891;
+      --accent-soft: #e8f0f6;
+      --review: #6b5435;
+      --good: #216c53;
+      --warn: #a06a12;
+      --bad: #922b21;
+      --shadow: 0 16px 38px rgba(17, 17, 17, 0.045);
+      --radius: 8px;
+      --serif: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+      --sans: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
     }
 
     * { box-sizing: border-box; }
+
+    @keyframes rise-in {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     body {
       margin: 0;
       color: var(--ink);
       background:
-        linear-gradient(to right, transparent 0, transparent calc(50% - 0.5px), rgba(114, 93, 63, 0.08) calc(50% - 0.5px), rgba(114, 93, 63, 0.08) calc(50% + 0.5px), transparent calc(50% + 0.5px), transparent 100%),
-        radial-gradient(circle at top, rgba(31, 79, 115, 0.07), transparent 30%),
-        var(--bg);
-      font-family: var(--sans);
+        radial-gradient(circle at top, rgba(50, 104, 145, 0.08), transparent 28%),
+        linear-gradient(180deg, #fcfbf8 0%, var(--bg) 100%);
+      font-family: var(--serif);
       line-height: 1.5;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
     }
 
     .page {
-      width: min(1320px, calc(100vw - 40px));
-      margin: 24px auto 56px;
+      width: min(1280px, calc(100vw - 48px));
+      margin: 18px auto 72px;
       display: grid;
-      gap: 20px;
+      gap: 24px;
     }
 
     .masthead {
       display: flex;
       justify-content: space-between;
-      align-items: flex-end;
+      align-items: end;
       gap: 18px;
-      padding: 12px 0 16px;
+      padding: 10px 0 18px;
+      border-top: 1px solid var(--line-strong);
       border-bottom: 3px double var(--line);
+      animation: rise-in 0.65s ease-out both;
     }
 
     .masthead-brand {
-      font-size: clamp(26px, 4vw, 42px);
+      font-family: var(--serif);
+      font-size: clamp(30px, 4vw, 46px);
       font-weight: 700;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.035em;
     }
 
     .masthead-meta {
-      font-family: var(--mono);
-      font-size: 12px;
+      max-width: 38ch;
+      font-family: var(--sans);
+      font-size: 11px;
       color: var(--muted);
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.15em;
       text-align: right;
+      line-height: 1.6;
     }
 
     .hero,
     .card {
       background: var(--paper);
       border: 1px solid var(--line);
-      border-radius: var(--radius);
       box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
     }
 
     .hero {
-      padding: 30px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(246, 240, 228, 0.95));
+      position: relative;
+      overflow: hidden;
+      padding: 40px clamp(22px, 4vw, 52px) 34px;
+      border-top: 4px solid var(--ink);
+      animation: rise-in 0.72s ease-out both;
     }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto -10% -40% auto;
+      width: 44%;
+      aspect-ratio: 1;
+      background: radial-gradient(circle, rgba(50, 104, 145, 0.13), transparent 68%);
+      pointer-events: none;
+    }
+
     .eyebrow {
+      position: relative;
+      z-index: 1;
       color: var(--accent);
-      font-family: var(--mono);
-      font-size: 12px;
-      letter-spacing: 0.14em;
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       font-weight: 700;
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     h1 {
-      margin: 0 0 12px;
-      font-size: clamp(34px, 5vw, 62px);
-      line-height: 1.02;
-      letter-spacing: -0.035em;
+      position: relative;
+      z-index: 1;
+      margin: 0 0 16px;
+      max-width: 13ch;
+      font-family: var(--serif);
+      font-size: clamp(42px, 6vw, 78px);
+      line-height: 0.97;
+      letter-spacing: -0.05em;
       font-weight: 700;
+      text-wrap: balance;
     }
 
     .lede {
-      color: var(--muted);
-      max-width: 70ch;
+      position: relative;
+      z-index: 1;
+      color: #464038;
+      max-width: 56rem;
       margin: 0;
-      font-size: 19px;
-      line-height: 1.75;
-      font-style: italic;
+      font-size: clamp(19px, 2.2vw, 25px);
+      line-height: 1.62;
+      font-style: normal;
+      text-wrap: pretty;
     }
 
     .hero-rail {
-      margin-top: 20px;
-      padding-top: 16px;
+      position: relative;
+      z-index: 1;
+      margin-top: 28px;
+      padding-top: 18px;
       border-top: 1px solid var(--line);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px 24px;
-      justify-content: space-between;
-      font-family: var(--mono);
-      font-size: 12px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      font-family: var(--sans);
+      font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.14em;
       color: var(--muted);
+    }
+
+    .hero-rail > div {
+      padding: 12px 14px;
+      border-top: 1px solid var(--line-strong);
+      background: rgba(255, 255, 255, 0.62);
     }
 
     .grid {
       display: grid;
-      grid-template-columns: 2.15fr 0.95fr;
-      gap: 20px;
+      grid-template-columns: minmax(0, 1.8fr) minmax(290px, 0.95fr);
+      gap: 24px;
+      animation: rise-in 0.72s ease-out 0.08s both;
     }
 
-    .card { padding: 22px; }
+    .card {
+      padding: 26px clamp(18px, 2.4vw, 30px);
+      border-radius: var(--radius);
+      animation: rise-in 0.72s ease-out 0.14s both;
+    }
+
+    article.card {
+      border-top: 3px solid var(--ink);
+    }
+
+    aside.card {
+      align-self: start;
+      position: sticky;
+      top: 20px;
+      border-top: 3px solid var(--accent);
+    }
+
     .section-title {
-      margin: 0 0 14px;
-      font-family: var(--mono);
-      font-size: 12px;
+      margin: 0 0 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--line);
+      font-family: var(--sans);
+      font-size: 11px;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.16em;
       color: var(--muted);
     }
 
     .body-text {
-      font-size: clamp(21px, 2vw, 27px);
-      line-height: 1.82;
+      max-width: 29ch;
       margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(23px, 2.3vw, 31px);
+      line-height: 1.77;
+      text-wrap: pretty;
     }
 
     .nyt-dropcap::first-letter {
       float: left;
-      font-size: 5rem;
+      font-family: var(--serif);
+      font-size: 4.85rem;
       line-height: 0.82;
-      padding: 0.07em 0.12em 0 0;
+      padding: 0.09em 0.12em 0 0;
       color: var(--accent);
       font-weight: 700;
     }
 
     .body-foot {
-      margin-top: 18px;
-      padding-top: 16px;
+      margin-top: 22px;
+      padding-top: 14px;
       border-top: 1px solid var(--line);
+      font-family: var(--sans);
       color: var(--muted);
-      font-size: 13px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      line-height: 1.8;
     }
 
     .stats {
       display: grid;
-      gap: 10px;
+      gap: 12px;
     }
 
     .stat {
-      padding: 14px;
-      border-radius: 16px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(246, 240, 228, 0.95));
+      padding: 16px;
       border: 1px solid var(--line);
+      border-left: 4px solid var(--accent);
+      background: var(--paper-strong);
     }
 
     .stat-label {
       color: var(--muted);
-      font-family: var(--mono);
-      font-size: 11px;
+      font-family: var(--sans);
+      font-size: 10px;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 4px;
+      letter-spacing: 0.16em;
+      margin-bottom: 8px;
     }
 
     .stat-value {
-      font-family: var(--mono);
-      font-size: 24px;
+      font-family: var(--sans);
+      font-size: 30px;
       font-weight: 800;
-      color: var(--accent);
+      line-height: 1.05;
+      color: var(--ink);
     }
 
     .stat-small .stat-value {
-      font-family: var(--sans);
-      font-size: 17px;
-      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 20px;
       font-weight: 700;
+      color: var(--ink);
     }
 
     .note-grid {
       display: grid;
-      gap: 10px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
     }
 
     .note-item {
-      padding: 12px 14px;
-      border-radius: 16px;
+      padding: 14px 16px;
       border: 1px solid var(--line);
       background: var(--paper-strong);
+      min-height: 110px;
     }
 
     .note-item strong {
       display: block;
-      font-family: var(--mono);
-      font-size: 11px;
+      font-family: var(--sans);
+      font-size: 10px;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.16em;
       color: var(--muted);
-      margin-bottom: 6px;
+      margin-bottom: 10px;
     }
 
     .note-item a {
       color: var(--accent);
       text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    .note-item a:hover {
+      border-color: currentColor;
     }
 
     .note-value {
       font-size: 15px;
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
-    .validation-list,
     .study-table {
       width: 100%;
       border-collapse: collapse;
       font-size: 14px;
+      background: rgba(255, 255, 255, 0.78);
     }
 
-    .validation-list td,
     .study-table th,
     .study-table td {
-      padding: 10px 12px;
+      padding: 12px 12px;
       border-bottom: 1px solid var(--line);
       vertical-align: top;
     }
@@ -245,216 +330,194 @@
     .study-table th {
       text-align: left;
       color: var(--muted);
-      font-family: var(--mono);
-      font-size: 11px;
+      font-family: var(--sans);
+      font-size: 10px;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.16em;
+      background: #f8f5ef;
+    }
+
+    .study-table tbody tr:hover {
+      background: rgba(50, 104, 145, 0.045);
+    }
+
+    .study-table tbody tr:nth-child(even) {
+      background: rgba(248, 245, 239, 0.7);
+    }
+
+    .data-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: end;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .data-search-wrap {
+      flex: 1 1 320px;
+      max-width: 520px;
+    }
+
+    .data-search-label,
+    .data-summary-label {
+      display: block;
+      margin-bottom: 8px;
+      font-family: var(--sans);
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+    }
+
+    .data-search {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid var(--line-strong);
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .data-search:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(50, 104, 145, 0.12);
+    }
+
+    .data-summary {
+      min-width: 180px;
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      background: var(--paper-strong);
+      font-family: var(--sans);
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.92);
     }
 
     .chip {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 64px;
-      padding: 6px 10px;
+      min-width: 68px;
+      padding: 6px 12px;
       border-radius: 999px;
-      font-family: var(--mono);
-      font-size: 11px;
+      border: 1px solid transparent;
+      font-family: var(--sans);
+      font-size: 10px;
       font-weight: 800;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       background: var(--accent-soft);
       color: var(--accent);
     }
 
-    .chip.pass { background: rgba(40, 95, 69, 0.13); color: var(--good); }
-    .chip.revise { background: rgba(157, 107, 31, 0.15); color: var(--warn); }
-    .chip.block { background: rgba(125, 43, 43, 0.15); color: var(--bad); }
-
-    .consensus-card {
-      padding: 18px;
-      border-radius: 18px;
-      background: linear-gradient(180deg, rgba(239, 227, 213, 0.8), rgba(252, 250, 244, 0.95));
-      border: 1px solid rgba(110, 67, 36, 0.22);
-      margin-bottom: 16px;
+    .chip.pass {
+      background: rgba(33, 108, 83, 0.1);
+      border-color: rgba(33, 108, 83, 0.16);
+      color: var(--good);
     }
 
-    .consensus-head {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: start;
-      margin-bottom: 12px;
+    .chip.revise {
+      background: rgba(160, 106, 18, 0.1);
+      border-color: rgba(160, 106, 18, 0.18);
+      color: var(--warn);
     }
 
-    .consensus-label {
-      font-family: var(--mono);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--review);
-      margin-bottom: 6px;
-    }
-
-    .consensus-value {
-      font-size: 28px;
-      font-weight: 700;
-      line-height: 1;
-    }
-
-    .consensus-meta {
-      margin-top: 10px;
-      font-family: var(--mono);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--muted);
-    }
-
-    .review-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px;
-    }
-
-    .review-board {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-      gap: 12px;
-    }
-
-    .review-board-item {
-      padding: 14px 16px;
-      border-radius: 18px;
-      border: 1px solid rgba(116, 100, 77, 0.22);
-      border-top: 3px solid rgba(31, 79, 115, 0.42);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(247, 242, 229, 0.95));
-    }
-
-    .review-board-role {
-      font-family: var(--mono);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-
-    .review-board-name {
-      font-size: 19px;
-      font-weight: 700;
-      color: var(--ink);
-    }
-
-    .review-board-meta,
-    .review-signoff {
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px dashed rgba(116, 100, 77, 0.35);
-      font-family: var(--mono);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-    }
-
-    .review-card {
-      padding: 16px;
-      border-radius: 18px;
-      border: 1px solid rgba(116, 100, 77, 0.22);
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.85), rgba(247, 242, 229, 0.95));
-    }
-
-    .review-card-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-
-    .reviewer-name {
-      font-size: 20px;
-      font-weight: 700;
-      text-transform: capitalize;
-    }
-
-    .review-focus {
-      margin-bottom: 10px;
-      font-family: var(--mono);
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--muted);
-    }
-
-    .review-notes {
-      margin: 0;
-      font-size: 16px;
-      line-height: 1.65;
-      color: var(--ink);
-    }
-
-    .review-actions {
-      margin-top: 12px;
-      padding-top: 10px;
-      border-top: 1px dashed rgba(116, 100, 77, 0.35);
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    .review-actions ul {
-      margin: 8px 0 0 16px;
-      padding: 0;
+    .chip.block {
+      background: rgba(146, 43, 33, 0.11);
+      border-color: rgba(146, 43, 33, 0.18);
+      color: var(--bad);
     }
 
     .plot-wrap {
       overflow-x: auto;
       border: 1px solid var(--line);
-      border-radius: 18px;
-      padding: 16px;
-      background: rgba(255, 255, 255, 0.75);
+      padding: 18px;
+      background: rgba(255, 255, 255, 0.9);
     }
 
     .plot-caption {
-      margin-top: 12px;
+      margin-top: 14px;
       color: var(--muted);
-      font-family: var(--mono);
-      font-size: 11px;
+      font-family: var(--sans);
+      font-size: 10px;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
-      line-height: 1.6;
+      letter-spacing: 0.16em;
+      line-height: 1.8;
     }
 
-    .json-box {
-      font-family: var(--mono);
-      font-size: 12px;
-      white-space: pre-wrap;
-      word-break: break-word;
-      background: #151b24;
-      color: #d9f5ea;
-      padding: 16px;
-      border-radius: 16px;
-      overflow: auto;
+    @media (max-width: 1100px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      aside.card {
+        position: static;
+      }
+
+      .hero-rail {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 900px) {
-      .grid { grid-template-columns: 1fr; }
-      .body-text { font-size: 20px; }
-      .masthead { flex-direction: column; align-items: start; }
-      .hero-rail { flex-direction: column; align-items: start; }
+      .page {
+        width: min(100vw - 28px, 1280px);
+        margin: 14px auto 48px;
+        gap: 18px;
+      }
+
+      .masthead {
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .masthead-meta {
+        text-align: left;
+      }
+
+      .body-text {
+        font-size: 20px;
+      }
+
+      .note-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .data-toolbar {
+        align-items: stretch;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .masthead,
+      .hero,
+      .grid,
+      .card {
+        animation: none;
+      }
     }
   </style>
 </head>
 <body>
   <main class="page">
     <header class="masthead">
-      <div class="masthead-brand">E156 Review Desk</div>
-      <div class="masthead-meta" id="masthead-meta">Interactive micro-paper edition</div>
+      <div class="masthead-brand">E156 Interactive Edition</div>
+      <div class="masthead-meta" id="masthead-meta">Interactive paper companion</div>
     </header>
 
     <section class="hero">
-      <div class="eyebrow">E156 Interactive Bundle</div>
+      <div class="eyebrow">Interactive Paper Companion</div>
       <h1 id="title" class="nyt-headline"></h1>
       <p class="lede nyt-subhead" id="lede"></p>
       <div class="hero-rail">
@@ -464,41 +527,21 @@
       </div>
     </section>
 
-    <section class="card">
-      <h2 class="section-title">Reviewer Board</h2>
-      <div class="review-board" id="review-board"></div>
-    </section>
-
     <section class="grid">
       <article class="card">
-        <h2 class="section-title">Frozen Body</h2>
+        <h2 class="section-title">Paper</h2>
         <p class="body-text nyt-dropcap" id="body"></p>
         <div class="body-foot" id="body-foot">The frozen body stands alone while the surrounding page carries the wider evidence layer.</div>
       </article>
 
       <aside class="card">
-        <h2 class="section-title">Core Record</h2>
+        <h2 class="section-title">Evidence Snapshot</h2>
         <div class="stats" id="core-stats"></div>
       </aside>
     </section>
 
     <section class="card">
-      <h2 class="section-title">Note Block</h2>
-      <div class="note-grid" id="note-grid"></div>
-    </section>
-
-    <section class="card">
-      <h2 class="section-title">Validation</h2>
-      <table class="validation-list" id="validation-table"></table>
-    </section>
-
-    <section class="card">
-      <h2 class="section-title">Multi-Persona Review</h2>
-      <div id="review-table"></div>
-    </section>
-
-    <section class="card">
-      <h2 class="section-title">Primary Plot</h2>
+      <h2 class="section-title">Interactive Plot</h2>
       <div class="plot-wrap">
         <svg id="forest-plot" width="980" height="360" aria-label="forest plot"></svg>
       </div>
@@ -506,13 +549,25 @@
     </section>
 
     <section class="card">
-      <h2 class="section-title">Study Table</h2>
-      <table class="study-table" id="study-table"></table>
+      <h2 class="section-title">Methods And Sources</h2>
+      <div class="note-grid" id="note-grid"></div>
     </section>
 
     <section class="card">
-      <h2 class="section-title">Embedded JSON</h2>
-      <div class="json-box" id="json-box"></div>
+      <h2 class="section-title">Data Explorer</h2>
+      <div class="data-toolbar">
+        <div class="data-search-wrap">
+          <label class="data-search-label" for="study-filter">Filter studies or effects</label>
+          <input id="study-filter" class="data-search" type="search" placeholder="Search study label, effect, or weight">
+        </div>
+        <div>
+          <div class="data-summary-label">Rows shown</div>
+          <div class="data-summary" id="data-summary">0 rows</div>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="study-table" id="study-table"></table>
+      </div>
     </section>
   </main>
 
@@ -620,30 +675,40 @@
     "personas": {
       "clinician": {
         "focus": "practical clarity",
+        "reviewer_id": "clinical-desk",
+        "signed_at": "2026-03-26",
         "verdict": "pass",
         "notes": "The question, treatment contrast, and practical takeaway are clear at the bedside level.",
         "required_actions": []
       },
       "statistician": {
         "focus": "numerical honesty",
+        "reviewer_id": "stats-desk",
+        "signed_at": "2026-03-26",
         "verdict": "pass",
         "notes": "The body names the pooled risk ratio and confidence interval directly and keeps the claim within the reported evidence.",
         "required_actions": []
       },
       "methods_editor": {
         "focus": "structure discipline",
+        "reviewer_id": "methods-desk",
+        "signed_at": "2026-03-26",
         "verdict": "pass",
         "notes": "All seven sentence roles are preserved and the boundary sentence functions as an explicit limitation.",
         "required_actions": []
       },
       "skeptic": {
         "focus": "overclaim and causality check",
+        "reviewer_id": "skeptic-desk",
+        "signed_at": "2026-03-26",
         "verdict": "pass",
         "notes": "Interpretation is restrained and does not claim superiority beyond the pooled outcomes and follow-up described.",
         "required_actions": []
       },
       "reader": {
         "focus": "flow and readability",
+        "reviewer_id": "reader-desk",
+        "signed_at": "2026-03-26",
         "verdict": "pass",
         "notes": "The paragraph reads cleanly in sequence, though the illustrative study rows belong outside the frozen body as they do here.",
         "required_actions": []
@@ -656,12 +721,48 @@
     "missing_personas": [],
     "invalid_personas": [],
     "empty_notes": [],
+    "missing_reviewer_ids": [],
+    "missing_signed_at": [],
+    "missing_reviewed_at": false,
+    "reviewed_at": "2026-03-26",
     "verdict_counts": {
       "pass": 5,
       "revise": 0,
       "block": 0
     },
-    "required_actions": []
+    "required_actions": [],
+    "reviewer_signoffs": [
+      {
+        "persona": "clinician",
+        "reviewer_id": "clinical-desk",
+        "signed_at": "2026-03-26",
+        "verdict": "pass"
+      },
+      {
+        "persona": "statistician",
+        "reviewer_id": "stats-desk",
+        "signed_at": "2026-03-26",
+        "verdict": "pass"
+      },
+      {
+        "persona": "methods_editor",
+        "reviewer_id": "methods-desk",
+        "signed_at": "2026-03-26",
+        "verdict": "pass"
+      },
+      {
+        "persona": "skeptic",
+        "reviewer_id": "skeptic-desk",
+        "signed_at": "2026-03-26",
+        "verdict": "pass"
+      },
+      {
+        "persona": "reader",
+        "reviewer_id": "reader-desk",
+        "signed_at": "2026-03-26",
+        "verdict": "pass"
+      }
+    ]
   }
 };
 
@@ -670,18 +771,6 @@
       if (className) node.className = className;
       if (text !== undefined) node.textContent = text;
       return node;
-    }
-
-    function normalizeVerdict(value) {
-      const text = String(value || "").toLowerCase();
-      if (text === "pass" || text === "revise" || text === "block") {
-        return text;
-      }
-      return "pass";
-    }
-
-    function personaLabel(value) {
-      return String(value || "").replace(/_/g, " ");
     }
 
     function appendStat(container, label, value, useSmallValue) {
@@ -875,6 +964,135 @@
       });
     }
 
+    function appendStat(container, label, value, useSmallValue) {
+      const card = el("div", useSmallValue ? "stat stat-small" : "stat");
+      card.append(el("div", "stat-label", label));
+      card.append(el("div", "stat-value", value ?? "-"));
+      container.append(card);
+    }
+
+    function renderCore(article) {
+      document.getElementById("title").textContent = article.title || "Untitled E156 record";
+      document.getElementById("lede").textContent =
+        article.summary ||
+        "A frozen 156-word body paired with a richer interactive evidence layer.";
+      document.getElementById("body").textContent = article.body || "";
+      document.getElementById("masthead-meta").textContent = `${article.date || "Undated"} | ${article.version || "No version"} | interactive paper companion`;
+      document.getElementById("hero-type").textContent = `Type: ${article.type || "-"}`;
+      document.getElementById("hero-version").textContent = `Version: ${article.version || "-"}`;
+      document.getElementById("hero-date").textContent = `Date: ${article.date || "-"}`;
+      document.getElementById("body-foot").textContent =
+        `Primary estimand: ${article.primary_estimand || "-"} | certainty: ${article.certainty || "-"} | readers can inspect the plot and study-level data below.`;
+
+      const core = document.getElementById("core-stats");
+      core.innerHTML = "";
+      appendStat(core, "Type", article.type);
+      appendStat(core, "Primary Estimand", article.primary_estimand, true);
+      appendStat(core, "Studies", article.study_count);
+      appendStat(core, "Participants", article.participant_count);
+      appendStat(core, "Version", article.version, true);
+      appendStat(core, "Certainty", article.certainty, true);
+    }
+
+    function renderNotes(article) {
+      const fields = [
+        ["App", article.app],
+        ["Data", article.data],
+        ["Code", article.code],
+        ["DOI", article.doi],
+        ["Version", article.version],
+        ["Date", article.date],
+        ["Protocol", article.protocol],
+        ["Source article", article.source_article]
+      ];
+
+      const grid = document.getElementById("note-grid");
+      grid.innerHTML = "";
+      fields.forEach(([label, value]) => {
+        const item = el("div", "note-item");
+        item.append(el("strong", "", label));
+        if (!value) {
+          item.append(el("div", "note-value", "-"));
+        } else if (typeof value === "string" && /^https?:/i.test(value)) {
+          const link = el("a", "note-value", value);
+          link.href = value;
+          link.target = "_blank";
+          link.rel = "noreferrer";
+          item.append(link);
+        } else {
+          item.append(el("div", "note-value", String(value)));
+        }
+        grid.append(item);
+      });
+    }
+
+    function renderStudyTable(article) {
+      const table = document.getElementById("study-table");
+      const searchInput = document.getElementById("study-filter");
+      const summary = document.getElementById("data-summary");
+      const studies = article.studies || [];
+
+      const renderRows = () => {
+        const query = String(searchInput?.value || "").trim().toLowerCase();
+        const filtered = studies.filter((study) => {
+          if (!query) return true;
+          const haystack = [study.label, study.effect, study.lower, study.upper, study.weight]
+            .map((value) => String(value ?? "").toLowerCase())
+            .join(" ");
+          return haystack.includes(query);
+        });
+
+        table.innerHTML = `
+          <thead>
+            <tr>
+              <th>Study</th>
+              <th>Effect</th>
+              <th>Lower</th>
+              <th>Upper</th>
+              <th>Weight</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        `;
+        const tbody = table.querySelector("tbody");
+
+        if (!studies.length) {
+          const row = document.createElement("tr");
+          row.innerHTML = `<td colspan="5">No study-level rows are embedded in this interactive companion.</td>`;
+          tbody.append(row);
+          summary.textContent = "0 of 0 rows";
+          return;
+        }
+
+        if (!filtered.length) {
+          const row = document.createElement("tr");
+          row.innerHTML = `<td colspan="5">No rows match the current filter.</td>`;
+          tbody.append(row);
+          summary.textContent = `0 of ${studies.length} rows`;
+          return;
+        }
+
+        filtered.forEach((study) => {
+          const row = document.createElement("tr");
+          row.innerHTML = `
+            <td>${study.label ?? ""}</td>
+            <td>${study.effect ?? ""}</td>
+            <td>${study.lower ?? ""}</td>
+            <td>${study.upper ?? ""}</td>
+            <td>${study.weight ?? ""}</td>
+          `;
+          tbody.append(row);
+        });
+
+        summary.textContent = `${filtered.length} of ${studies.length} rows`;
+      };
+
+      if (searchInput) {
+        searchInput.addEventListener("input", renderRows);
+      }
+      renderRows();
+    }
+
     function drawForest(article) {
       const svg = document.getElementById("forest-plot");
       const width = Number(svg.getAttribute("width"));
@@ -1012,12 +1230,8 @@
 
     renderCore(E156_ARTICLE);
     renderNotes(E156_ARTICLE);
-    renderValidation(E156_ARTICLE);
-    renderReviewBoard(E156_ARTICLE);
-    renderReview(E156_ARTICLE);
-    renderStudyTable(E156_ARTICLE);
     drawForest(E156_ARTICLE);
-    renderJson(E156_ARTICLE);
+    renderStudyTable(E156_ARTICLE);
   </script>
 </body>
 </html>

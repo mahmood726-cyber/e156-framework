@@ -46,6 +46,7 @@ Use the built-in reviewer tools:
 
 ```powershell
 python scripts\review_e156.py --init --article output\json\reduced-dose-doacs-vte-demo.json --output reviews\reduced-dose-doacs-vte-demo.review.json
+python scripts\review_e156.py --init --article examples\clinical-ma.json --output reviews\clinical-ma.review.json --starter-mode --seed-reviewers --signed-at 2026-03-26
 python scripts\review_e156.py --check --review reviews\reduced-dose-doacs-vte-demo.review.json --summary-out reviews\reduced-dose-doacs-vte-demo.summary.json
 ```
 
@@ -53,9 +54,23 @@ Gate logic:
 
 - any missing persona => `block`
 - any empty notes => `block`
+- any missing `reviewer_id` => `block`
+- any missing `signed_at` => `block`
+- missing top-level `reviewed_at` => `block`
 - any `block` verdict => `block`
 - else any `revise` verdict => `revise`
 - else => `pass`
+
+Required signed review fields:
+
+- review-level `reviewed_at`
+- per-persona `reviewer_id`
+- per-persona `signed_at`
+- per-persona `notes`
+
+Starter review option:
+
+- use `--starter-mode --seed-reviewers --signed-at YYYY-MM-DD` to create a non-final signed starter file with reviewer desk assignments and `revise` verdict placeholders
 
 ## Packaging Pass
 
